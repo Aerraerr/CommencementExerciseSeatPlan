@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Official Seat Plan</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.5/viewer.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ================= BASE ================= */
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fb;
+            color: #1e293b;
+        }
+
+        /* ================= HEADER ================= */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+
+            padding: 20px;
+            background: #ffffff;
+
+            border-bottom: 1px solid #e2e8f0;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #1e3a8a;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* ================= CONTAINER ================= */
+        .container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* ================= GRID ================= */
+        .seatplan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .seatplan-grid img {
+            width: 100%;
+            border-radius: 14px;
+
+            cursor: pointer;
+
+            border: 1px solid #e2e8f0;
+
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+
+            transition: 0.25s ease;
+        }
+
+        .seatplan-grid img:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            color: #64748b;
+
+            border-top: 1px solid #e2e8f0;
+
+            background: #fff;
+        }
+
+        footer a {
+            color: #1e3a8a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div style="display:flex; align-items:center; justify-content:center; gap:15px; padding:15px; border-bottom:2px solid #ddd; margin-bottom:15px;">
+
+    <img src="../assets/img/BU-logo.png" alt="BU Logo"
+         style="width:70px; height:70px; object-fit:contain;">
+
+    <div style="text-align:center;">
+
+        <h1 style="margin:0; font-size:22px;">
+            Bicol University
+        </h1>
+
+        <h2 style="margin:0; font-size:18px; font-weight:bold;">
+            Commencement Exercise 2026
+        </h2>
+
+        <p style="margin:0; font-size:12px; color:gray;">
+            Official Seat Plan
+        </p>
+
+    </div>
+
+</div>
+
+<!-- GRID -->
+<div class="container">
+
+    <div class="seatplan-grid" id="seatplans">
+
+        <img src="../assets/img/SEAT PLAN V.1.png" alt="Seat Plan 1">
+        <img src="../assets/img/SEAT PLAN V.2.png" alt="Seat Plan 2">
+        <img src="../assets/img/SEAT PLAN V.3.png" alt="Seat Plan 3">
+        <img src="../assets/img/SEAT PLAN V.4.png" alt="Seat Plan 4">
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    Developed by
+    <a href="https://www.facebook.com/Aerraerru" target="_blank">Aeron Jead</a>
+</footer>
+
+<!-- VIEWER -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.5/viewer.min.js"></script>
+
+<script>
+    const viewer = new Viewer(document.getElementById('seatplans'), {
+        toolbar: true,
+        navbar: false,
+        title: true,
+        zoomable: true,
+        movable: true,
+        scalable: true,
+        transition: true
+    });
+</script>
+
+</body>
+</html>
