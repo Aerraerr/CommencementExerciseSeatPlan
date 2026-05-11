@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BU Seat Plan</title>
+    <link rel="stylesheet" href="assets/css/control.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<!-- EXPORT MODAL -->
+<div id="exportModal" class="modal">
+
+    <div class="modal-content">
+
+        <h3>Export Graduate List</h3>
+
+        <label>Export By:</label>
+
+        <select id="exportType">
+            <option value="all">All Students</option>
+            <option value="course">By Course</option>
+            <option value="college">By College</option>
+            <option value="cluster">By Cluster</option>
+        </select>
+
+        <input type="text" id="exportValue" placeholder="Enter filter value (optional)">
+
+        <div style="margin-top:15px; display:flex; gap:10px; justify-content:flex-end;">
+            <button onclick="closeExportModal()">Cancel</button>
+            <button onclick="exportExcel()">Export</button>
+        </div>
+
+    </div>
+
+</div>
+<div style="display:flex; align-items:center; justify-content:center; gap:15px; padding:15px; border-bottom:2px solid #ddd; margin-bottom:15px;">
+
+    <img src="assets/img/BU-logo.png" alt="BU Logo"
+         style="width:70px; height:70px; object-fit:contain;">
+
+    <div style="text-align:center;">
+
+        <h1 style="margin:0; font-size:22px;">
+            Bicol University
+        </h1>
+
+        <h2 style="margin:0; font-size:18px; font-weight:bold;">
+            Commencement Exercise 2026
+        </h2>
+
+        <p style="margin:0; font-size:12px; color:gray;">
+            Graduation Seat Plan System
+        </p>
+
+    </div>
+
+</div>
+
+<div class="controls">
+    <input type="file" id="excelFiles" multiple>
+
+    <button onclick="uploadFiles()">Upload</button>
+    <button onclick="loadFromServer()">Reload Saved Data</button>
+
+    <button class="danger-btn" onclick="confirmEraseData()">
+        Erase All Data (Day 1 Reset)
+    </button>
+</div>
+<div id="student-info" class="info-card">
+    <h3>🎓 Selected Seat</h3>
+
+    <div class="info-row">
+        <span class="label">Seat No</span>
+        <span class="value" id="info-seat">—</span>
+    </div>
+
+    <div class="info-row">
+        <span class="label">Name</span>
+        <span class="value" id="info-name">—</span>
+    </div>
+
+    <div class="info-row">
+        <span class="label">Course</span>
+        <span class="value" id="info-course">—</span>
+    </div>
+    <div class="info-row">
+        <span class="label">College</span>
+        <span class="value" id="info-college">—</span>
+    </div>
+    <div class="info-row">
+        <span class="label" style="font-style: italic; color: #999;"></span>
+        <span class="value" id="info-note" style="font-style: italic; color: red; font-size: 13px;">
+            Note: Each student is entitled to 1 extra seat for a Parent, Guardian, etc.
+        </span>
+    </div>
+
+
+</div>
+
+
+<div id="seat-container">
+
+    <div id="output"></div>
+</div>
+
+<div id="scroll-note">
+    ⇆ Slide left or right to view full seat plan
+</div>
+    <div style="display:flex; justify-content:center; margin-top:15px;">
+        <a href="pages/seatplan.html" target="_blank"
+           style="padding:10px 20px; background: lightblue; color:black; text-decoration:none; border-radius:8px; font-size:13px; font-weight:600; box-shadow:0 3px 8px rgba(0,0,0,0.15); transition: all 0.2s ease; display:inline-block;
+           "
+           onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.25)'"
+           onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 3px 8px rgba(0,0,0,0.15)'">
+            View Official Seatplan
+        </a>
+    </div>
+
+
+<div class="table-container">
+
+<div class="table-header">
+    <h3>Student List</h3>
+
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:#fff;padding:10px 12px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06);">
+        <button onclick="openExportModal()" style="background:#16a34a;color:#fff;border:none;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer;"><i class="fa-solid fa-file-excel"></i> Export Excel</button>
+        <select id="sortMode" onchange="applySort()" style="padding:10px 12px;border-radius:10px;border:1px solid #e2e8f0;background:#f8fafc;cursor:pointer;">
+            <option value="course">Sort by Course</option>
+            <option value="cluster">Sort by Cluster</option>
+            <option value="college">Sort by College</option>
+            <option value="name">Sort by Name</option>
+        </select>
+        <div style="display:flex;align-items:center;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:0 10px;min-width:220px;">
+            <i class="fa-solid fa-magnifying-glass" style="color:#94a3b8;"></i>
+            <input type="text" id="searchInput" placeholder="Search student name..." onkeyup="searchStudent()" style="border:none;outline:none;padding:10px;width:100%;background:transparent;">
+        </div>
+    </div>
+</div>
+    <table id="student-list">
+        <thead>
+            <tr>
+                <th>Seat No</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>College</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+</div>
+
+
+
+
+
+
+</div>
+<script src="assets/js/control.js"></script>
+<script src="assets/js/export-excel.js"></script>
+<script src="assets/js/erase-alldata.js"></script>
+</body>
+</html>

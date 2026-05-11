@@ -1,0 +1,30 @@
+{
+    "sourceFile": "library/upload.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1778333732396,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1778334075644,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n <?php\r\n \r\n header(\"Content-Type: application/json\");\r\n \r\n-require_once \"SimpleXLSX.php\";\r\n+require_once __DIR__ . \"/SimpleXLSX.php\";\r\n \r\n $db = new PDO(\"sqlite:../database/seatplan.db\");\r\n $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n \r\n"
+                },
+                {
+                    "date": 1778334191786,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \r\n header(\"Content-Type: application/json\");\r\n \r\n require_once __DIR__ . \"/SimpleXLSX.php\";\r\n+use Shuchkin\\SimpleXLSX;\r\n \r\n $db = new PDO(\"sqlite:../database/seatplan.db\");\r\n $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n \r\n"
+                },
+                {
+                    "date": 1778334217292,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,13 @@\n \r\n header(\"Content-Type: application/json\");\r\n \r\n require_once __DIR__ . \"/SimpleXLSX.php\";\r\n+\r\n use Shuchkin\\SimpleXLSX;\r\n \r\n $db = new PDO(\"sqlite:../database/seatplan.db\");\r\n+\r\n $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n \r\n try {\r\n \r\n"
+                }
+            ],
+            "date": 1778333732396,
+            "name": "Commit-0",
+            "content": "<?php\r\n\r\nheader(\"Content-Type: application/json\");\r\n\r\nrequire_once \"SimpleXLSX.php\";\r\n\r\n$db = new PDO(\"sqlite:../database/seatplan.db\");\r\n$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n\r\ntry {\r\n\r\n    if (!isset($_FILES['files'])) {\r\n        throw new Exception(\"No files uploaded.\");\r\n    }\r\n\r\n    $seatNo = 1;\r\n\r\n    // GET LAST SEAT NUMBER\r\n    $last = $db->query(\"SELECT MAX(seat_no) as maxSeat FROM students\")\r\n               ->fetch(PDO::FETCH_ASSOC);\r\n\r\n    if ($last['maxSeat']) {\r\n        $seatNo = $last['maxSeat'] + 1;\r\n    }\r\n\r\n    foreach ($_FILES['files']['tmp_name'] as $key => $tmpName) {\r\n\r\n        $fileName = $_FILES['files']['name'][$key];\r\n        $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));\r\n\r\n        // ================= TXT FILE =================\r\n        if ($extension == \"txt\") {\r\n\r\n            $lines = file($tmpName);\r\n\r\n            foreach ($lines as $line) {\r\n\r\n                $data = explode(\",\", trim($line));\r\n\r\n                if (count($data) >= 3) {\r\n\r\n                    $name = trim($data[0]);\r\n                    $course = trim($data[1]);\r\n                    $college = trim($data[2]);\r\n\r\n                    $stmt = $db->prepare(\"\r\n                        INSERT INTO students (seat_no, name, course, college)\r\n                        VALUES (?, ?, ?, ?)\r\n                    \");\r\n\r\n                    $stmt->execute([\r\n                        $seatNo,\r\n                        $name,\r\n                        $course,\r\n                        $college\r\n                    ]);\r\n\r\n                    $seatNo++;\r\n                }\r\n            }\r\n        }\r\n\r\n        // ================= XLSX FILE =================\r\n        else if ($extension == \"xlsx\") {\r\n\r\n            if ($xlsx = SimpleXLSX::parse($tmpName)) {\r\n\r\n                $rows = $xlsx->rows();\r\n\r\n                foreach ($rows as $index => $row) {\r\n\r\n                    // SKIP HEADER\r\n                    if ($index == 0) continue;\r\n\r\n                    $name = trim($row[0] ?? '');\r\n                    $course = trim($row[1] ?? '');\r\n                    $college = trim($row[2] ?? '');\r\n\r\n                    if ($name == '') continue;\r\n\r\n                    $stmt = $db->prepare(\"\r\n                        INSERT INTO students (seat_no, name, course, college)\r\n                        VALUES (?, ?, ?, ?)\r\n                    \");\r\n\r\n                    $stmt->execute([\r\n                        $seatNo,\r\n                        $name,\r\n                        $course,\r\n                        $college\r\n                    ]);\r\n\r\n                    $seatNo++;\r\n                }\r\n\r\n            } else {\r\n                throw new Exception(SimpleXLSX::parseError());\r\n            }\r\n        }\r\n    }\r\n\r\n    echo json_encode([\r\n        \"success\" => true,\r\n        \"message\" => \"Files uploaded successfully.\"\r\n    ]);\r\n\r\n} catch (Exception $e) {\r\n\r\n    echo json_encode([\r\n        \"success\" => false,\r\n        \"message\" => $e->getMessage()\r\n    ]);\r\n}"
+        }
+    ]
+}
