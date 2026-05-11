@@ -1,0 +1,22 @@
+{
+    "sourceFile": "day2/library/erase.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1778508897976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1778510454596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,11 +11,12 @@\n     $db->exec(\"DELETE FROM studentsDay2\");\r\n \r\n     $db->exec(\"DELETE FROM sqlite_sequence WHERE name='studentsDay2'\");\r\n \r\n-    echo json_encode([\r\n-        \"success\" => true\r\n-    ]);\r\n+echo json_encode([\r\n+    \"success\" => true,\r\n+    \"message\" => \"Database reset successfully.\"\r\n+]);\r\n \r\n } catch (Exception $e) {\r\n \r\n     echo json_encode([\r\n"
+                }
+            ],
+            "date": 1778508897976,
+            "name": "Commit-0",
+            "content": "<?php\r\n\r\nheader('Content-Type: application/json');\r\n\r\ntry {\r\n\r\n    $db = new PDO(\"sqlite:../../database/seatplan.db\");\r\n\r\n    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n\r\n    $db->exec(\"DELETE FROM studentsDay2\");\r\n\r\n    $db->exec(\"DELETE FROM sqlite_sequence WHERE name='studentsDay2'\");\r\n\r\n    echo json_encode([\r\n        \"success\" => true\r\n    ]);\r\n\r\n} catch (Exception $e) {\r\n\r\n    echo json_encode([\r\n        \"success\" => false,\r\n        \"message\" => $e->getMessage()\r\n    ]);\r\n\r\n}"
+        }
+    ]
+}

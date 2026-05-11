@@ -1,0 +1,22 @@
+{
+    "sourceFile": "day2/library/delete.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1778508882557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1778510412243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,6 +27,9 @@\n \r\n $success = $stmt->execute([$id]);\r\n \r\n echo json_encode([\r\n-    \"success\" => $success\r\n+    \"success\" => $success,\r\n+    \"message\" => $success\r\n+        ? \"Student deleted successfully.\"\r\n+        : \"Delete failed.\"\r\n ]);\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1778508882557,
+            "name": "Commit-0",
+            "content": "<?php\r\n\r\nheader(\"Content-Type: application/json\");\r\n\r\n$db = new PDO(\"sqlite:../../database/seatplan.db\");\r\n\r\n$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n\r\n$data = json_decode(file_get_contents(\"php://input\"), true);\r\n\r\nif (!isset($data['id'])) {\r\n\r\n    echo json_encode([\r\n        \"success\" => false,\r\n        \"message\" => \"No student ID.\"\r\n    ]);\r\n\r\n    exit;\r\n}\r\n\r\n$id = $data['id'];\r\n\r\n$stmt = $db->prepare(\"\r\n    DELETE FROM studentsDay2\r\n    WHERE id = ?\r\n\");\r\n\r\n$success = $stmt->execute([$id]);\r\n\r\necho json_encode([\r\n    \"success\" => $success\r\n]);"
+        }
+    ]
+}

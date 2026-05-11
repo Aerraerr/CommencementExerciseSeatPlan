@@ -1,0 +1,18 @@
+{
+    "sourceFile": "day2/library/load.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1778508864330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1778508864330,
+            "name": "Commit-0",
+            "content": "<?php\r\n\r\nheader(\"Content-Type: application/json\");\r\n\r\n$db = new PDO(\"sqlite:../../database/seatplan.db\");\r\n\r\n$result = $db->query(\"\r\n    SELECT\r\n        id,\r\n        seat_no,\r\n        name,\r\n        course,\r\n        college\r\n    FROM studentsDay2\r\n    ORDER BY seat_no ASC\r\n\");\r\n\r\n$data = $result->fetchAll(PDO::FETCH_ASSOC);\r\n\r\necho json_encode($data);"
+        }
+    ]
+}

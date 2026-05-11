@@ -1,0 +1,22 @@
+{
+    "sourceFile": "day2/library/upload.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1778509298769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1778510383782,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,11 +67,12 @@\n             }\r\n         }\r\n     }\r\n \r\n-    echo json_encode([\r\n-        \"success\" => true\r\n-    ]);\r\n+echo json_encode([\r\n+    \"success\" => true,\r\n+    \"message\" => \"Files uploaded successfully.\"\r\n+]);\r\n \r\n } catch (Exception $e) {\r\n \r\n     echo json_encode([\r\n"
+                }
+            ],
+            "date": 1778509298769,
+            "name": "Commit-0",
+            "content": "<?php\r\n\r\nheader(\"Content-Type: application/json\");\r\n\r\nrequire_once \"../../library/SimpleXLSX.php\";\r\n\r\nuse Shuchkin\\SimpleXLSX;\r\n\r\n$db = new PDO(\"sqlite:../../database/seatplan.db\");\r\n\r\n$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n\r\ntry {\r\n\r\n    if (!isset($_FILES['files'])) {\r\n        throw new Exception(\"No files uploaded.\");\r\n    }\r\n\r\n    $seatNo = 1;\r\n\r\n    $last = $db->query(\"\r\n        SELECT MAX(seat_no) as maxSeat\r\n        FROM studentsDay2\r\n    \")->fetch(PDO::FETCH_ASSOC);\r\n\r\n    if ($last['maxSeat']) {\r\n        $seatNo = $last['maxSeat'] + 1;\r\n    }\r\n\r\n    foreach ($_FILES['files']['tmp_name'] as $key => $tmpName) {\r\n\r\n        $fileName = $_FILES['files']['name'][$key];\r\n\r\n        $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));\r\n\r\n        if ($extension == \"xlsx\") {\r\n\r\n            if ($xlsx = SimpleXLSX::parse($tmpName)) {\r\n\r\n                $rows = $xlsx->rows();\r\n\r\n                foreach ($rows as $index => $row) {\r\n\r\n                    if ($index == 0) continue;\r\n\r\n                    $name = trim($row[0] ?? '');\r\n                    $course = trim($row[1] ?? '');\r\n                    $college = trim($row[2] ?? '');\r\n\r\n                    if ($name == '') continue;\r\n\r\n                    $stmt = $db->prepare(\"\r\n                        INSERT INTO studentsDay2\r\n                        (seat_no, name, course, college)\r\n                        VALUES (?, ?, ?, ?)\r\n                    \");\r\n\r\n                    $stmt->execute([\r\n                        $seatNo,\r\n                        $name,\r\n                        $course,\r\n                        $college\r\n                    ]);\r\n\r\n                    $seatNo++;\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    echo json_encode([\r\n        \"success\" => true\r\n    ]);\r\n\r\n} catch (Exception $e) {\r\n\r\n    echo json_encode([\r\n        \"success\" => false,\r\n        \"message\" => $e->getMessage()\r\n    ]);\r\n\r\n}"
+        }
+    ]
+}
