@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1778424946710,
@@ -16,6 +16,34 @@
                 {
                     "date": 1778425561445,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n     </div>\r\n \r\n </div>\r\n \r\n-<div class=\"controls\">\r\n+<div style=\"display: none;\" class=\"controls\">\r\n     <input type=\"file\" id=\"excelFiles\" multiple>\r\n \r\n     <button onclick=\"uploadFiles()\">Upload</button>\r\n     <button onclick=\"loadFromServer()\">Reload Saved Data</button>\r\n"
+                },
+                {
+                    "date": 1778462637702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n <html>\r\n <head>\r\n     <title>BU Seat Plan</title>\r\n     <meta charset=\"UTF-8\">\r\n-    <link rel=\"stylesheet\" href=\"assets/css/control.css\">\r\n+    <link rel=\"stylesheet\" href=\"assets/css/index.css\">\r\n     <link rel=\"stylesheet\" href=\"assets/css/modal.css\">\r\n     <script src=\"https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js\"></script>\r\n     <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css\">\r\n </head>\r\n"
+                },
+                {
+                    "date": 1778462666665,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,8 @@\n \r\n     <div class=\"modal-content\">\r\n \r\n         <h3>Export Graduate List</h3>\r\n-\r\n         <label>Export By:</label>\r\n \r\n         <select id=\"exportType\">\r\n             <option value=\"all\">All Students</option>\r\n"
+                },
+                {
+                    "date": 1778466028791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,11 @@\n \r\n         <p style=\"margin:0; font-size:12px; color:gray;\">\r\n             Graduation Seat Plan System\r\n         </p>\r\n-\r\n+        <p style=\"margin:0; font-size:12px; color:gray;\">\r\n+            DAY 1\r\n+        </p>\r\n     </div>\r\n \r\n </div>\r\n \r\n"
+                },
+                {
+                    "date": 1778470025926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,17 +58,18 @@\n     </div>\r\n \r\n </div>\r\n \r\n-<div style=\"display: none;\" class=\"controls\">\r\n-    <input type=\"file\" id=\"excelFiles\" multiple>\r\n+<div class=\"controls-top\">\r\n+    <h2>DAY 1 - JUNE 15, 2026</h2>\r\n \r\n-    <button onclick=\"uploadFiles()\">Upload</button>\r\n-    <button onclick=\"loadFromServer()\">Reload Saved Data</button>\r\n-\r\n-    <button class=\"danger-btn\" onclick=\"confirmEraseData()\">\r\n-        Erase All Data (Day 1 Reset)\r\n-    </button>\r\n+    <div class=\"controls\">\r\n+        <input type=\"file\" id=\"excelFiles\" multiple>\r\n+        <button onclick=\"uploadFiles()\">Upload</button>\r\n+        <button class=\"danger-btn\" onclick=\"confirmEraseData()\">\r\n+            Erase All Data (Day 1 Reset)\r\n+        </button>\r\n+    </div>\r\n </div>\r\n <div id=\"student-info\" class=\"info-card\">\r\n     <h3>🎓 Selected Seat</h3>\r\n \r\n"
+                },
+                {
+                    "date": 1778470040046,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,9 +61,9 @@\n \r\n <div class=\"controls-top\">\r\n     <h2>DAY 1 - JUNE 15, 2026</h2>\r\n \r\n-    <div class=\"controls\">\r\n+    <div style=\"display: none;\" class=\"controls\">\r\n         <input type=\"file\" id=\"excelFiles\" multiple>\r\n         <button onclick=\"uploadFiles()\">Upload</button>\r\n         <button class=\"danger-btn\" onclick=\"confirmEraseData()\">\r\n             Erase All Data (Day 1 Reset)\r\n"
+                },
+                {
+                    "date": 1778470608012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,17 +59,25 @@\n \r\n </div>\r\n \r\n <div class=\"controls-top\">\r\n-    <h2>DAY 1 - JUNE 15, 2026</h2>\r\n \r\n-    <div style=\"display: none;\" class=\"controls\">\r\n+    <div class=\"day-tabs\">\r\n+        <button class=\"day-tab active\">DAY 1 - JUNE 15, 2026</button>\r\n+\r\n+        <a class=\"day-tab\" href=\"day2/day2.html\">\r\n+            DAY 2 - JUNE 16, 2026\r\n+        </a>\r\n+    </div>\r\n+\r\n+    <div class=\"controls\">\r\n         <input type=\"file\" id=\"excelFiles\" multiple>\r\n         <button onclick=\"uploadFiles()\">Upload</button>\r\n         <button class=\"danger-btn\" onclick=\"confirmEraseData()\">\r\n             Erase All Data (Day 1 Reset)\r\n         </button>\r\n     </div>\r\n+\r\n </div>\r\n <div id=\"student-info\" class=\"info-card\">\r\n     <h3>🎓 Selected Seat</h3>\r\n \r\n"
+                },
+                {
+                    "date": 1778470654148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,25 +59,17 @@\n \r\n </div>\r\n \r\n <div class=\"controls-top\">\r\n+    <h2>DAY 1 - JUNE 15, 2026</h2>\r\n \r\n-    <div class=\"day-tabs\">\r\n-        <button class=\"day-tab active\">DAY 1 - JUNE 15, 2026</button>\r\n-\r\n-        <a class=\"day-tab\" href=\"day2/day2.html\">\r\n-            DAY 2 - JUNE 16, 2026\r\n-        </a>\r\n-    </div>\r\n-\r\n-    <div class=\"controls\">\r\n+    <div style=\"display: none;\" class=\"controls\">\r\n         <input type=\"file\" id=\"excelFiles\" multiple>\r\n         <button onclick=\"uploadFiles()\">Upload</button>\r\n         <button class=\"danger-btn\" onclick=\"confirmEraseData()\">\r\n             Erase All Data (Day 1 Reset)\r\n         </button>\r\n     </div>\r\n-\r\n </div>\r\n <div id=\"student-info\" class=\"info-card\">\r\n     <h3>🎓 Selected Seat</h3>\r\n \r\n"
                 }
             ],
             "date": 1778424946710,

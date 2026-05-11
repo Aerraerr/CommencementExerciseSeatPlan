@@ -30,65 +30,7 @@ h2 {
 }
 
 /* ====================== CONTROLS ====================== */
-.controls-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
 
-/* TAB CONTAINER */
-.day-tabs {
-    display: flex;
-    gap: 10px;
-}
-
-/* TAB BUTTON STYLE */
-.day-tab {
-    padding: 10px 14px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-
-    background: #e2e8f0;
-    font-weight: 600;
-
-    transition: 0.2s ease;
-    overflow: hidden;
-}
-
-/* REMOVE LINK STYLE INSIDE BUTTON */
-.day-tab a {
-    text-decoration: none;
-    color: #1f2937;
-    display: block;
-}
-
-/* ACTIVE TAB */
-.day-tab.active {
-    background: #1e3a8a;
-}
-
-.day-tab.active a {
-    color: white;
-}
-
-/* HOVER */
-.day-tab:hover {
-    background: #2563eb;
-}
-
-.day-tab:hover a {
-    color: white;
-}
-
-/* REMOVE THIS (it was breaking styling)
-.active {
-    background: #1e3a8a;
-    color: white;
-}
-*/
 .controls {
 
     display:flex;
@@ -98,10 +40,11 @@ h2 {
     flex-wrap:wrap;
     margin-bottom:20px;
 
-    background:transparent;
+    background:white;
     padding:18px;
     border-radius:16px;
-    color: white !important;
+
+    box-shadow:0 6px 20px rgba(0,0,0,0.06);
 }
 
 .controls input[type="file"]{
@@ -765,4 +708,3 @@ td button:last-child:hover {
         padding:12px;
     }
 }
-

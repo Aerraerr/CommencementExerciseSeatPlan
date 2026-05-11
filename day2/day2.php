@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>BU Seat Plan</title>
-    <link rel="stylesheet" href="assets/css/control.css">
-    <link rel="stylesheet" href="assets/css/modal.css">
+    <link rel="stylesheet" href="../assets/css/control.css">
+    <link rel="stylesheet" href="../assets/css/modal.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -28,7 +28,7 @@
     </div>
 </div>
 <div style="display:flex; align-items:center; justify-content:center; gap:15px; padding:15px; border-bottom:2px solid #ddd; margin-bottom:15px;">
-    <img src="assets/img/BU-logo.png" alt="BU Logo" style="width:70px; height:70px; object-fit:contain;">
+    <img src="../assets/img/BU-logo.png" alt="BU Logo" style="width:70px; height:70px; object-fit:contain;">
     <div style="text-align:center;">
         <h1 style="margin:0; font-size:22px;">
             Bicol University
@@ -41,21 +41,22 @@
         </p>
     </div>
 </div>
-<h2>DAY 1 - JUNE 15, 2026</h2>
+<h2>DAY 2 - JUNE 16, 2026</h2>
 <div class="controls-top">
 
     <div class="day-tabs">
-        <button class="day-tab active"><a href="control.php">DAY 1 - JUNE 15, 2026</a></button>
-        <button class="day-tab "><a href="day2/day2.php">DAY 2 - JUNE 16, 2026</a></button>
+        <button class="day-tab "><a href="../control.php">DAY 1 - JUNE 15, 2026</a></button>
+        <button class="day-tab active"><a href="day2/day2.php">DAY 2 - JUNE 16, 2026</a></button>
     </div>
 
     <div class="controls">
         <input type="file" id="excelFiles" multiple>
-        <button  onclick="uploadFiles()">Upload</button>
+        <button onclick="uploadFiles()">Upload</button>
         <button class="danger-btn" onclick="confirmEraseData()">
             Erase All Data (Day 1 Reset)
         </button>
     </div>
+
 </div>
 <div id="student-info" class="info-card">
     <h3>🎓 Selected Seat</h3>
@@ -139,8 +140,8 @@
 
 
 </div>
-<script src="assets/js/control.js"></script>
-<script src="assets/js/export-excel.js"></script>
-<script src="assets/js/erase-alldata.js"></script>
+<script src="../assets/js/control.js"></script>
+<script src="../assets/js/export-excel.js"></script>
+<script src="../assets/js/erase-alldata.js"></script>
 </body>
 </html>

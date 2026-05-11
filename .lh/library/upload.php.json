@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1778333732396,
@@ -20,6 +20,26 @@
                 {
                     "date": 1778334217292,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,13 @@\n \r\n header(\"Content-Type: application/json\");\r\n \r\n require_once __DIR__ . \"/SimpleXLSX.php\";\r\n+\r\n use Shuchkin\\SimpleXLSX;\r\n \r\n $db = new PDO(\"sqlite:../database/seatplan.db\");\r\n+\r\n $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n \r\n try {\r\n \r\n"
+                },
+                {
+                    "date": 1778479598764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -112,5 +112,23 @@\n     echo json_encode([\r\n         \"success\" => false,\r\n         \"message\" => $e->getMessage()\r\n     ]);\r\n-}\n\\ No newline at end of file\n+}\r\n+\r\n+\r\n+\r\n+\r\n+<?php\r\n+\r\n+header(\"Content-Type: application/json\");\r\n+\r\n+$db = new PDO(\"sqlite:../database/seatplan.db\");\r\n+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n+\r\n+$count = $db->query(\"SELECT COUNT(*) as total FROM students\")\r\n+            ->fetch(PDO::FETCH_ASSOC);\r\n+\r\n+echo json_encode([\r\n+    \"hasData\" => $count['total'] > 0,\r\n+    \"count\" => $count['total']\r\n+]);\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1778479623701,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -117,8 +117,10 @@\n \r\n \r\n \r\n \r\n+?>\r\n+\r\n <?php\r\n \r\n header(\"Content-Type: application/json\");\r\n \r\n@@ -130,5 +132,6 @@\n \r\n echo json_encode([\r\n     \"hasData\" => $count['total'] > 0,\r\n     \"count\" => $count['total']\r\n-]);\n\\ No newline at end of file\n+]);\r\n+?>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1778479710528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -133,5 +133,30 @@\n echo json_encode([\r\n     \"hasData\" => $count['total'] > 0,\r\n     \"count\" => $count['total']\r\n ]);\r\n-?>\n\\ No newline at end of file\n+?>\r\n+\r\n+\r\n+<script>\r\n+    document.addEventListener(\"DOMContentLoaded\", () => {\r\n+    checkDatabaseData();\r\n+});\r\n+\r\n+function checkDatabaseData() {\r\n+\r\n+    fetch(\"check_data.php\")\r\n+        .then(res => res.json())\r\n+        .then(data => {\r\n+\r\n+            const uploadBtn = document.getElementById(\"uploadBtn\");\r\n+\r\n+            if (data.hasData) {\r\n+                uploadBtn.style.display = \"none\";\r\n+            } else {\r\n+                uploadBtn.style.display = \"inline-block\";\r\n+            }\r\n+\r\n+        })\r\n+        .catch(err => console.error(\"Check DB error:\", err));\r\n+}\r\n+</script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1778479793077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -136,27 +136,5 @@\n ]);\r\n ?>\r\n \r\n \r\n-<script>\r\n-    document.addEventListener(\"DOMContentLoaded\", () => {\r\n-    checkDatabaseData();\r\n-});\r\n-\r\n-function checkDatabaseData() {\r\n-\r\n-    fetch(\"check_data.php\")\r\n-        .then(res => res.json())\r\n-        .then(data => {\r\n-\r\n-            const uploadBtn = document.getElementById(\"uploadBtn\");\r\n-\r\n-            if (data.hasData) {\r\n-                uploadBtn.style.display = \"none\";\r\n-            } else {\r\n-                uploadBtn.style.display = \"inline-block\";\r\n-            }\r\n-\r\n-        })\r\n-        .catch(err => console.error(\"Check DB error:\", err));\r\n-}\r\n-</script>\n\\ No newline at end of file\n+<script></script>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1778479800949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -119,22 +119,4 @@\n \r\n \r\n ?>\r\n \r\n-<?php\r\n-\r\n-header(\"Content-Type: application/json\");\r\n-\r\n-$db = new PDO(\"sqlite:../database/seatplan.db\");\r\n-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n-\r\n-$count = $db->query(\"SELECT COUNT(*) as total FROM students\")\r\n-            ->fetch(PDO::FETCH_ASSOC);\r\n-\r\n-echo json_encode([\r\n-    \"hasData\" => $count['total'] > 0,\r\n-    \"count\" => $count['total']\r\n-]);\r\n-?>\r\n-\r\n-\r\n-<script></script>\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1778333732396,

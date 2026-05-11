@@ -378,51 +378,51 @@ function renderSeatPlan(students) {
 
         grid.className = "grid";
 
-grouped[key].forEach(student => {
+    grouped[key].forEach(student => {
 
-    for (let i = 0; i < 2; i++) { //duplicate
+        for (let i = 0; i < 2; i++) { //duplicate
 
-        const seat = document.createElement("div");
+            const seat = document.createElement("div");
 
-        seat.className = "seat";
+            seat.className = "seat";
 
-        seat.innerHTML = `
-            <div class="seat-code">
-                ${student.seat}
-            </div>
-        `;
+            seat.innerHTML = `
+                <div class="seat-code">
+                    ${student.seat}
+                </div>
+            `;
 
-        // EXECUTIVE COLOR
-        if (student.isExecutive) {
+            // EXECUTIVE COLOR
+            if (student.isExecutive) {
 
-            seat.style.backgroundColor = "#87CEFA";
-            seat.style.color = "#000";
-            seat.style.fontWeight = "bold";
+                seat.style.backgroundColor = "#87CEFA";
+                seat.style.color = "#000";
+                seat.style.fontWeight = "bold";
 
-        }
+            }
 
-        // CLICK (same student)
-        seat.addEventListener("click", () => {
+            // CLICK (same student)
+            seat.addEventListener("click", () => {
 
-            document
-                .querySelectorAll(".seat")
-                .forEach(s => s.classList.remove("selected"));
+                document
+                    .querySelectorAll(".seat")
+                    .forEach(s => s.classList.remove("selected"));
 
-            seat.classList.add("selected");
+                seat.classList.add("selected");
 
-            showInfo(student);
+                showInfo(student);
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
             });
 
-        });
+            grid.appendChild(seat);
+        }
 
-        grid.appendChild(seat);
-    }
-
-});
+    });
 
         clusterDiv.appendChild(title);
 

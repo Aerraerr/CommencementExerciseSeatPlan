@@ -3,7 +3,7 @@
 <head>
     <title>BU Seat Plan</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/control.css">
+    <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/modal.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -15,7 +15,6 @@
     <div class="modal-content">
 
         <h3>Export Graduate List</h3>
-
         <label>Export By:</label>
 
         <select id="exportType">
@@ -53,20 +52,23 @@
         <p style="margin:0; font-size:12px; color:gray;">
             Graduation Seat Plan System
         </p>
-
+        <p style="margin:0; font-size:12px; color:gray;">
+            DAY 1
+        </p>
     </div>
 
 </div>
 
-<div style="display: none;" class="controls">
-    <input type="file" id="excelFiles" multiple>
+<div class="controls-top">
+    <h2>DAY 1 - JUNE 15, 2026</h2>
 
-    <button onclick="uploadFiles()">Upload</button>
-    <button onclick="loadFromServer()">Reload Saved Data</button>
-
-    <button class="danger-btn" onclick="confirmEraseData()">
-        Erase All Data (Day 1 Reset)
-    </button>
+    <div style="display: none;" class="controls">
+        <input type="file" id="excelFiles" multiple>
+        <button onclick="uploadFiles()">Upload</button>
+        <button class="danger-btn" onclick="confirmEraseData()">
+            Erase All Data (Day 1 Reset)
+        </button>
+    </div>
 </div>
 <div id="student-info" class="info-card">
     <h3>🎓 Selected Seat</h3>
