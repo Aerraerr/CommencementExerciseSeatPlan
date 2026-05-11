@@ -109,7 +109,7 @@ else if (type === "course") {
 
     }
 
-    XLSX.writeFile(wb, "List of Student Graduates - S.Y 2025 - 2026.xlsx");
+    XLSX.writeFile(wb, "[DAY 2] List of Student Graduates - S.Y 2025 - 2026.xlsx");
 
     closeExportModal();
 }
